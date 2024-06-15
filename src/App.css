@@ -1,12 +1,4 @@
-body {
-  background-color: #fff; /* Default background color */
-  color: #333; /* Default text color */
-}
-
-body.dark-mode {
-  background-color: #121212; /* Dark mode background color */
-  color: #fff; /* Dark mode text color */
-}
+/* App.css */
 .card {
   width: 60rem;
   display: flex;
@@ -16,9 +8,20 @@ body.dark-mode {
 
 .card.completed {
   opacity: 0.5;
-  transform: translateY(50px); /* Adjust the distance as needed */
+  transform: translateY(0);
+  text-decoration: line-through;
 }
 
-.card.completed .card-body {
-  text-decoration: line-through;
+.card-body {
+  display: flex;
+}
+
+.delete-button {
+  margin-left: auto; 
+  opacity: 0.5; 
+  transition: opacity 0.3s ease-out; 
+}
+
+.delete-button:hover {
+  opacity: 1; 
 }

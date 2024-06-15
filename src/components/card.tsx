@@ -1,17 +1,20 @@
-import { useState } from "react";
 import "../App.css"; // Import your CSS file for Card styling
+import IconButton from "./IconButton";
 
 interface Props {
   children: string;
+  completed: boolean;
   onComplete: () => void;
+  onDelete: () => void;
 }
 
-const Card = ({ children, onComplete }: Props) => {
-  const [completed, setCompleted] = useState(false);
-
+const Card = ({ children, completed, onComplete, onDelete }: Props) => {
   const handleComplete = () => {
-    setCompleted(!completed); // Toggle completed state
     onComplete(); // Callback to parent component
+  };
+
+  const handleDelete = () => {
+    onDelete(); // Callback to parent component for delete
   };
 
   const cardStyle = {
@@ -32,11 +35,14 @@ const Card = ({ children, onComplete }: Props) => {
           <input
             className="form-check-input"
             type="checkbox"
-            value=""
+            checked={completed}
             id="flexCheckDefault"
             style={{ alignSelf: "right" }}
             onChange={handleComplete}
           />
+          <div className="delete-button">
+            <IconButton onClick={handleDelete} />
+          </div>
         </div>
       </div>
     </center>

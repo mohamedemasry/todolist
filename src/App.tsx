@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Card from "./components/card";
 import Input from "./components/input";
 import "./App.css";
-
+interface Task {
+  text: string;
+  completed: boolean;
+}
 function App() {
-  const [tasks, setTasks] = useState<string[]>(["Finish This App"]);
+  const [tasks, setTasks] = useState<Task[]>([
+    { text: "Default Task ✨", completed: false },
+  ]);
 
   const addTask = (newTask: string): void => {
-    setTasks([newTask, ...tasks]);
+    setTasks([{ text: newTask, completed: false }, ...tasks]);
   };
 
   const markComplete = (index: number): void => {
-    // To handle completion logic if needed
-    // For simplicity, we just remove the task from the list//
     const updatedTasks = [...tasks];
-    //updatedTasks.splice(index, 1);
-    setTasks(updatedTasks);
+    updatedTasks[index].completed = !updatedTasks[index].completed;
+
+    if (updatedTasks[index].completed) {
+      // Move the completed task to the bottom
+      const completedTask = updatedTasks.splice(index, 1)[0];
+      setTasks([...updatedTasks, completedTask]);
+    } else {
+      // Move the uncompleted task to the top
+      const uncompletedTask = updatedTasks.splice(index, 1)[0];
+      setTasks([uncompletedTask, ...updatedTasks]);
+    }
   };
 
   return (
@@ -25,8 +37,12 @@ function App() {
         <Input onAdd={addTask} />
       </center>
       {tasks.map((task, index) => (
-        <Card key={index} onComplete={() => markComplete(index)}>
-          {task}
+        <Card
+          key={index}
+          completed={task.completed}
+          onComplete={() => markComplete(index)}
+        >
+          {task.text}
         </Card>
       ))}
     </div>
