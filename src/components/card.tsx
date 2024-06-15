@@ -31,15 +31,14 @@ const Card = ({ children, completed, onComplete, onDelete }: Props) => {
     <center>
       <div className="card" style={cardStyle}>
         <div className="card-body" style={{ display: "flex" }}>
-          <h5 style={{ paddingRight: "10px" }}>{children}</h5>
           <input
             className="form-check-input"
             type="checkbox"
             checked={completed}
-            id="flexCheckDefault"
-            style={{ alignSelf: "right" }}
+            style={{ padding: "10px" }}
             onChange={handleComplete}
           />
+          <h5 style={{ paddingLeft: "10px" }}> {children}</h5>
           <div className="delete-button">
             <IconButton onClick={handleDelete} />
           </div>

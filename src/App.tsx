@@ -24,9 +24,10 @@ function App() {
       const completedTask = updatedTasks.splice(index, 1)[0];
       setTasks([...updatedTasks, completedTask]);
     } else {
-      // Move the uncompleted task to the top
+      // Move the uncompleted task to the bottom
       const uncompletedTask = updatedTasks.splice(index, 1)[0];
-      setTasks([uncompletedTask, ...updatedTasks]);
+      setTasks([...updatedTasks, uncompletedTask]);
+
     }
   };
 
@@ -41,6 +42,7 @@ function App() {
           key={index}
           completed={task.completed}
           onComplete={() => markComplete(index)}
+          onDelete={() => setTasks(tasks.filter((_, i) => i !== index))}
         >
           {task.text}
         </Card>
