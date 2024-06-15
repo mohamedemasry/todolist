@@ -1,0 +1,24 @@
+body {
+  background-color: #fff; /* Default background color */
+  color: #333; /* Default text color */
+}
+
+body.dark-mode {
+  background-color: #121212; /* Dark mode background color */
+  color: #fff; /* Dark mode text color */
+}
+.card {
+  width: 60rem;
+  display: flex;
+  margin: 10px;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.card.completed {
+  opacity: 0.5;
+  transform: translateY(50px); /* Adjust the distance as needed */
+}
+
+.card.completed .card-body {
+  text-decoration: line-through;
+}
